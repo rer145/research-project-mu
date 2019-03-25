@@ -97,6 +97,7 @@ def download_current_week():
 
     # loop through all pages and save data as csv
     for i in range(1, 31):
+        print('Downloading page', str(i))
         soup = get_soup(RANKINGS_URL.replace('{0}', str(i)))
         output = parse_ranking_table(soup)
 
@@ -119,6 +120,7 @@ def download_current_week():
             writer.writerows(csv_data)
             f.close()
 
+    print('Done.')
     return output_file
 
 
@@ -185,7 +187,7 @@ def import_ranking_file(filepath):
     conn.close()
 
 
-print('Dowloading current week')
+print('Downloading current week')
 filepath = download_current_week()
 
 print('Importing file:', filepath)
